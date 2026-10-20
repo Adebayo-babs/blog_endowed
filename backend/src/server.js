@@ -28,6 +28,21 @@ app.use(cors({
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(compression());
 app.use(express.json({ limit: '4mb' }));
+
+// Image links are saved with the address of whichever server uploaded them (e.g. localhost while testing).
+// Rewrite every media link to this server's public address so images work wherever the API runs.
+const MEDIA_LINK = /https?:\/\/[^\s"'<>()\\]+?\/api\/media\//g;
+app.use((req, res, next) => {
+  const json = res.json.bind(res);
+  res.json = (data) => {
+    const base = (process.env.PUBLIC_API_URL || `${req.protocol}://${req.get('host')}`).trim().replace(/\/+$/, '');
+    const body = JSON.stringify(data).replace(MEDIA_LINK, `${base}/api/media/`);
+    return json(JSON.parse(body));
+  };
+  next();
+});
+
+
 if (process.env.NODE_ENV !== 'test') app.use(morgan(process.env.NODE_ENV === 'production' ? 'tiny' : 'dev'));
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));
