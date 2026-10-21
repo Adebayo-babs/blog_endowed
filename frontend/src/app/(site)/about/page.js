@@ -1,5 +1,4 @@
 import { getJSON } from '@/lib/api';
-import Avatar from '@/components/Avatar';
 import Socials from '@/components/Socials';
 import Image from 'next/image';
 
@@ -21,9 +20,8 @@ export default async function AboutPage() {
           <Socials socials={s.socials} className="mt-7" />
         </div>
         <div className="relative mx-auto aspect-square w-64 overflow-hidden rounded-[2rem] bg-indigo-soft md:w-full">
-          {s.authorAvatar
-            ? <Image src={s.authorAvatar} alt={s.authorName || ''} fill sizes="320px" className="object-cover" priority />
-            : <div className="grid h-full place-items-center"><Avatar name={s.authorName} size={140} /></div>}
+          <Image src={s.authorAvatar || '/writer/portrait.webp'} alt={s.authorName || ''} fill sizes="(min-width: 768px) 320px, 256px"
+            className="object-cover object-top" priority />
         </div>
       </div>
       {s.aboutContent && (

@@ -75,7 +75,7 @@ export default async function StoryPage({ params }) {
           )}
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-line py-4">
             <div className="flex items-center gap-3">
-              <Avatar src={settings.authorAvatar} name={settings.authorName} size={42} />
+              <Avatar src={settings.authorAvatar || '/writer/avatar.webp'} name={settings.authorName} size={42} />
               <div className="leading-tight">
                 <p className="font-semibold">{settings.authorName}</p>
                 <p className="text-sm text-muted"><time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time></p>

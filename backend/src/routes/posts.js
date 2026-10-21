@@ -54,9 +54,13 @@ router.get('/', async (req, res) => {
 
 router.get('/popular', async (req, res) => {
   const limit = Math.min(10, parseInt(req.query.limit) || 5);
-  const posts = await Post.find(published()).select(LIST_FIELDS).sort({ views: -1 }).limit(limit)
+  // The newest story is always shown first, followed by the most-viewed of the rest
+  const newest = await Post.findOne(published()).sort({ publishedAt: -1 }).select(LIST_FIELDS)
     .populate('category', 'name slug color').lean();
-  res.json({ posts });
+  const rest = await Post.find({ ...published(), ...(newest && { _id: { $ne: newest._id } }) })
+    .select(LIST_FIELDS).sort({ views: -1 }).limit(newest ? limit - 1 : limit)
+    .populate('category', 'name slug color').lean();
+  res.json({ posts: newest ? [newest, ...rest] : rest });
 });
 
 router.get('/tags', async (_req, res) => {

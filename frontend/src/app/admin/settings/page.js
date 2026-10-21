@@ -44,9 +44,9 @@ export default function SettingsAdmin() {
         <Panel title="About you">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <Avatar src={s.authorAvatar} name={s.authorName} size={64} />
+              <Avatar src={s.authorAvatar || '/writer/avatar.webp'} name={s.authorName} size={64} />
               <button onClick={() => fileRef.current?.click()} className={btn.ghost}>{s.authorAvatar ? 'Change photo' : 'Upload photo'}</button>
-              {s.authorAvatar && <button onClick={() => setS({ ...s, authorAvatar: '' })} className={btn.danger}>Remove</button>}
+              {s.authorAvatar && <button onClick={() => setS({ ...s, authorAvatar: '' })} className={btn.danger}>Use original</button>}
               <input ref={fileRef} type="file" accept="image/*" hidden onChange={async (e) => {
                 const f = e.target.files[0]; e.target.value = '';
                 if (f) try { setS({ ...s, authorAvatar: await uploadImage(f) }); show('Photo uploaded. Save to keep it.'); } catch (err) { show(err.message, 'error'); }

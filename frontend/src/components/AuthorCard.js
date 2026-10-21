@@ -6,7 +6,7 @@ export default function AuthorCard({ settings = {}, compact = false }) {
   return (
     <section aria-label="About the writer" className="rounded-3xl bg-indigo-soft p-6">
       <div className="flex items-center gap-4">
-        <Avatar src={settings.authorAvatar} name={settings.authorName} size={compact ? 52 : 64} />
+        <Avatar src={settings.authorAvatar || '/writer/avatar.webp'} name={settings.authorName} size={compact ? 52 : 64} />
         <div>
           <p className="text-sm text-muted">Written by</p>
           <p className="text-lg font-bold leading-tight">{settings.authorName}</p>
