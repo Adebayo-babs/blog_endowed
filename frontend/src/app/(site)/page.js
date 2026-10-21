@@ -27,18 +27,23 @@ export default async function Home() {
 
   if (!hero) {
     return (
-      <div className="mx-auto max-w-3xl px-4 py-24 sm:px-6">
+      <>
+      <MeetTheWriter settings={settings} first />
+      <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Empty title="The first story is on its way">
           {settings.authorName || 'The writer'} is putting the finishing touches on it. Create an account now and you’ll be ready to save it and leave a comment.
         </Empty>
       </div>
+      </>
     );
   }
 
   return (
     <>
-      {/* Hero: the story's own opening line does the talking */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 pt-10 sm:px-6 md:pt-16">
+      <MeetTheWriter settings={settings} first />
+
+      {/* Featured story: its own opening line does the talking */}
+      <section aria-label="Featured story" className="mx-auto max-w-6xl px-4 pb-16 pt-16 sm:px-6 md:pt-20">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
           <div>
             <TopicLabel category={hero.category} />
@@ -47,9 +52,9 @@ export default async function Home() {
                 <span aria-hidden className="block h-[0.62em] font-serif text-[1.9em] not-italic leading-[1] text-marigold">“</span>
                 {openingLine(hero.excerpt).replace(/^[“"]\s*/, '').replace(/[”"]$/, '')}
               </blockquote>
-              <h1 className="mt-8 text-2xl font-bold tracking-[-0.02em] sm:text-[1.9rem]">
+              <h2 className="mt-8 text-2xl font-bold tracking-[-0.02em] sm:text-[1.9rem]">
                 <span className="marker">{hero.title}</span>
-              </h1>
+              </h2>
             </Link>
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
               <Link href={`/blog/${hero.slug}`}
@@ -90,8 +95,6 @@ export default async function Home() {
           </div>
         </section>
       )}
-
-      <MeetTheWriter settings={settings} />
 
       <div className="mx-auto grid max-w-6xl gap-14 px-4 pt-12 sm:px-6 lg:grid-cols-[1fr_20rem]">
         <section aria-labelledby="latest">
