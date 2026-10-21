@@ -5,8 +5,8 @@ import { getJSON } from '@/lib/api';
 import { openingLine, formatDate } from '@/lib/format';
 import PostRow, { TopicLabel } from '@/components/PostRow';
 import MostRead from '@/components/MostRead';
-import AuthorCard from '@/components/AuthorCard';
 import Empty from '@/components/Empty';
+import MeetTheWriter from '@/components/MeetTheWriter';
 
 export const revalidate = 60;
 
@@ -91,6 +91,8 @@ export default async function Home() {
         </section>
       )}
 
+      <MeetTheWriter settings={settings} />
+
       <div className="mx-auto grid max-w-6xl gap-14 px-4 pt-12 sm:px-6 lg:grid-cols-[1fr_20rem]">
         <section aria-labelledby="latest">
           <div className="flex items-baseline justify-between">
@@ -108,7 +110,6 @@ export default async function Home() {
 
         <aside className="space-y-10 lg:sticky lg:top-24 lg:self-start">
           <MostRead posts={popular?.posts} />
-          <AuthorCard settings={settings} compact />
           {tags?.tags?.length > 0 && (
             <section aria-labelledby="tags-heading">
               <h2 id="tags-heading" className="text-lg font-bold">Tags</h2>

@@ -9,6 +9,10 @@ const settingsSchema = new mongoose.Schema(
     authorBio: { type: String, default: 'I write the letters I wish someone had written to me in my first year at university.' },
     authorAvatar: { type: String, default: '' },
     aboutContent: { type: String, default: '' },
+    // Home page "meet the writer" section. Empty photos fall back to the photos bundled with the site.
+    homeHeading: { type: String, default: '' },
+    homeIntro: { type: String, default: '' },
+    homePhotos: { type: [String], default: [] },
     socials: {
       instagram: { type: String, default: '' },
       x: { type: String, default: '' },

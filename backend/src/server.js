@@ -41,8 +41,6 @@ app.use((req, res, next) => {
   };
   next();
 });
-
-
 if (process.env.NODE_ENV !== 'test') app.use(morgan(process.env.NODE_ENV === 'production' ? 'tiny' : 'dev'));
 
 app.get('/api/health', (_req, res) => res.json({ ok: true, time: new Date().toISOString() }));

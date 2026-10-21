@@ -1,5 +1,16 @@
-export const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000').replace(/\/$/, '');
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000').replace(/\/$/, '');
+// Accepts values with or without https://, stray quotes, spaces or a trailing slash
+function cleanUrl(value, fallback) {
+  let v = (value || '').trim().replace(/^['"]|['"]$/g, '').replace(/\/+$/, '');
+  if (!v) return fallback;
+  if (!/^https?:\/\//i.test(v)) v = `${/^(localhost|127\.)/.test(v) ? 'http' : 'https'}://${v}`;
+  try { return new URL(v).origin; } catch { return fallback; }
+}
+
+export const API_URL = cleanUrl(process.env.NEXT_PUBLIC_API_URL, 'http://localhost:5000');
+export const SITE_URL = cleanUrl(
+  process.env.NEXT_PUBLIC_SITE_URL || (process.env.VERCEL_PROJECT_PRODUCTION_URL && `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`),
+  'http://localhost:3000'
+);
 export const TOKEN_KEY = 'ew_token';
 
 /** Server-side fetch with ISR caching. Returns null instead of throwing so pages still render. */

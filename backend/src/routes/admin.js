@@ -181,7 +181,10 @@ router.get('/readers', async (_req, res) => {
 /* ---------- Site settings ---------- */
 router.put('/settings', async (req, res) => {
   const s = await Settings.get();
-  const fields = ['siteName', 'tagline', 'authorName', 'authorBio', 'authorAvatar'];
+  const fields = ['siteName', 'tagline', 'authorName', 'authorBio', 'authorAvatar', 'homeHeading', 'homeIntro'];
+  if (Array.isArray(req.body.homePhotos)) {
+    s.homePhotos = req.body.homePhotos.filter((u) => typeof u === 'string').slice(0, 2);
+  }
   fields.forEach((f) => { if (typeof req.body[f] === 'string') s[f] = req.body[f]; });
   if (typeof req.body.aboutContent === 'string') s.aboutContent = clean(req.body.aboutContent);
   if (req.body.socials) s.socials = { ...s.socials.toObject?.() ?? s.socials, ...req.body.socials };

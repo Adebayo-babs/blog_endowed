@@ -56,6 +56,42 @@ export default function SettingsAdmin() {
             <Field label="Short bio" htmlFor="ab" hint="One or two sentences, shown under every story."><textarea id="ab" rows={3} value={s.authorBio} onChange={set('authorBio')} className={inputCls} /></Field>
           </div>
         </Panel>
+        <Panel title="Home page introduction" className="xl:col-span-2">
+          <p className="mb-4 text-sm text-ink-2">The “Meet the writer” section on the home page. Leave a photo or the text empty to use what came with the site.</p>
+          <div className="grid gap-6 md:grid-cols-[auto_1fr]">
+            <div className="flex gap-4">
+              {[0, 1].map((i) => {
+                const src = s.homePhotos?.[i] || (i === 0 ? '/writer/standing.webp' : '/writer/seated.webp');
+                const setPhoto = (url) => { const arr = [...(s.homePhotos || ['', ''])]; while (arr.length < 2) arr.push(''); arr[i] = url; setS({ ...s, homePhotos: arr }); };
+                return (
+                  <div key={i} className="w-32">
+                    <div className="relative aspect-[3/4] overflow-hidden rounded-xl bg-sunken">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={src} alt="" className="h-full w-full object-cover" />
+                    </div>
+                    <label className={`${btn.ghost} mt-2 w-full cursor-pointer`}>
+                      {i === 0 ? 'Main photo' : 'Small photo'}
+                      <input type="file" accept="image/*" hidden onChange={async (e) => {
+                        const f = e.target.files[0]; e.target.value = '';
+                        if (f) try { setPhoto(await uploadImage(f)); show('Photo uploaded. Save to keep it.'); } catch (err) { show(err.message, 'error'); }
+                      }} />
+                    </label>
+                    {s.homePhotos?.[i] && <button onClick={() => setPhoto('')} className={`${btn.danger} mt-1 w-full`}>Use original</button>}
+                  </div>
+                );
+              })}
+            </div>
+            <div className="space-y-4">
+              <Field label="Heading" htmlFor="hh" hint={`Leave empty for “Hi, I’m ${s.authorName || 'your name'}.”`}>
+                <input id="hh" value={s.homeHeading || ''} onChange={set('homeHeading')} className={inputCls} />
+              </Field>
+              <Field label="Introduction" htmlFor="hi" hint="Leave a blank line between paragraphs.">
+                <textarea id="hi" rows={8} value={s.homeIntro || ''} onChange={set('homeIntro')} className={inputCls}
+                  placeholder="Leave empty to use the introduction that came with the site." />
+              </Field>
+            </div>
+          </div>
+        </Panel>
         <Panel title="Social links">
           <div className="grid gap-4 sm:grid-cols-2">
             {SOCIALS.map(([k, l]) => (
