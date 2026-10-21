@@ -25,7 +25,7 @@ export default async function BlogPage({ searchParams }) {
     <div className="mx-auto max-w-4xl px-4 pt-12 sm:px-6 md:pt-16">
       <h1 className="text-4xl font-extrabold tracking-[-0.03em] sm:text-5xl">All stories</h1>
       <p className="mt-3 max-w-xl font-serif text-xl text-ink-2">
-        {data?.total ? `${data.total} ${data.total === 1 ? 'story' : 'stories'} so far.` : 'Stories to read between lectures.'} Pick a topic or start from the top.
+        {data?.total ? `${data.total} ${data.total === 1 ? 'story' : 'stories'} so far.` : 'Ideas for writing and teaching, with more on the way.'} Pick a topic or start from the top.
       </p>
 
       <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">

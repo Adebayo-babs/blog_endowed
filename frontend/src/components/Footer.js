@@ -31,7 +31,7 @@ export default function Footer({ settings = {} }) {
         </div>
       </div>
       <div className="border-t border-line">
-        <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-muted sm:px-6">© {year} {settings.siteName || 'Endowed Writes'}. Written with love for every student still figuring it out.</p>
+        <p className="mx-auto max-w-6xl px-4 py-5 text-sm text-muted sm:px-6">© {year} {settings.siteName || 'The Endowed Academy'}. Thinking, writing and teaching with intention.</p>
       </div>
     </footer>
   );

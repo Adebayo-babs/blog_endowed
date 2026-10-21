@@ -40,7 +40,8 @@ const makeExcerpt = (text = '', len = 220) =>
 
 const slugify = (s) => slugifyLib(s, { lower: true, strict: true, trim: true }).slice(0, 90) || 'post';
 
-const lagosDay = (date = new Date()) =>
-  new Intl.DateTimeFormat('en-CA', { timeZone: 'Africa/Lagos' }).format(date);
+// Calendar day in the writer's time zone (Missouri), used to group daily reads
+const siteDay = (date = new Date()) =>
+  new Intl.DateTimeFormat('en-CA', { timeZone: process.env.SITE_TIMEZONE || 'America/Chicago' }).format(date);
 
-module.exports = { clean, toPlainText, readingTime, makeExcerpt, slugify, lagosDay };
+module.exports = { clean, toPlainText, readingTime, makeExcerpt, slugify, siteDay };

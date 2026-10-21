@@ -15,7 +15,7 @@ export default async function SearchPage({ searchParams }) {
       <form action="/search" className="relative mt-8" role="search">
         <label htmlFor="q" className="sr-only">Search stories</label>
         <Search size={22} aria-hidden className="pointer-events-none absolute left-5 top-1/2 -translate-y-1/2 text-muted" />
-        <input id="q" name="q" defaultValue={q} autoFocus placeholder="Try “exams”, “purpose” or “relationship”"
+        <input id="q" name="q" defaultValue={q} autoFocus placeholder="Try “feedback”, “essays” or “lesson plan”"
           className="w-full rounded-full border border-line bg-surface py-4 pl-14 pr-32 font-serif text-xl placeholder:text-muted focus:border-indigo focus:outline-none" />
         <button className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-ink px-5 py-2.5 font-semibold text-paper hover:bg-indigo">Search</button>
       </form>
@@ -23,7 +23,7 @@ export default async function SearchPage({ searchParams }) {
         <div className="mt-8">
           <p className="text-ink-2">{data?.total || 0} {data?.total === 1 ? 'result' : 'results'} for <span className="font-semibold text-ink">“{q}”</span></p>
           <StoryList data={data} makeHref={(n) => `/search?q=${encodeURIComponent(q)}&page=${n}`}
-            emptyTitle="Nothing matched that" emptyText="Check the spelling, or try a broader word like “faith” or “school”." />
+            emptyTitle="Nothing matched that" emptyText="Check the spelling, or try a broader word like “writing” or “teaching”." />
         </div>
       )}
     </div>

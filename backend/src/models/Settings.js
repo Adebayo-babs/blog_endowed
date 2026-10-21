@@ -3,16 +3,18 @@ const mongoose = require('mongoose');
 const settingsSchema = new mongoose.Schema(
   {
     key: { type: String, default: 'site', unique: true },
-    siteName: { type: String, default: 'Endowed Writes' },
-    tagline: { type: String, default: 'Honest stories on faith, purpose and becoming, for anyone finding their way through campus and beyond.' },
-    authorName: { type: String, default: 'The Writer' },
-    authorBio: { type: String, default: 'I write the letters I wish someone had written to me in my first year at university.' },
+    siteName: { type: String, default: 'The Endowed Academy' },
+    tagline: { type: String, default: 'Practical ideas for thinking, writing, and teaching with intention.' },
+    authorName: { type: String, default: 'Esther' },
+    authorBio: { type: String, default: 'Graduate student pursuing an MA in Writing at Missouri State University. I share teaching strategies, writing resources and reflections on how we write, teach and communicate.' },
     authorAvatar: { type: String, default: '' },
     aboutContent: { type: String, default: '' },
     // Home page "meet the writer" section. Empty photos fall back to the photos bundled with the site.
     homeHeading: { type: String, default: '' },
     homeIntro: { type: String, default: '' },
     homePhotos: { type: [String], default: [] },
+    // No default on purpose: older saved settings must read as version 1 so the brand update runs once
+    brandVersion: { type: Number },
     socials: {
       instagram: { type: String, default: '' },
       x: { type: String, default: '' },
@@ -27,7 +29,7 @@ const settingsSchema = new mongoose.Schema(
 
 settingsSchema.statics.get = async function () {
   let doc = await this.findOne({ key: 'site' });
-  if (!doc) doc = await this.create({ key: 'site' });
+  if (!doc) doc = await this.create({ key: 'site', brandVersion: 2 });
   return doc;
 };
 

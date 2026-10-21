@@ -1,6 +1,6 @@
-# Endowed Writes
+# The Endowed Academy
 
-A blog for university students: stories on faith, purpose, relationships, campus life and career.
+Practical ideas for thinking, writing, and teaching with intention. A blog by Esther for writing teachers, educators, graduate students and anyone interested in writing and learning.
 
 - **frontend/**: Next.js 16 (React 19) site and admin dashboard. Deploy to **Vercel**.
 - **backend/**: Node.js + Express API with MongoDB. Deploy to **Render**.
@@ -111,5 +111,5 @@ npm run dev            # http://localhost:3000
 
 - **Palette**: paper `#F6F3FB`, ink `#1E1638`, indigo `#3B2A86`, marigold `#F4B13E`, rose `#C9426A`. Dark mode has its own tuned values in `frontend/src/app/globals.css`.
 - **Type**: Bricolage Grotesque for headings and interface, Newsreader for reading. Both are self-hosted from npm, so there's no Google Fonts request.
-- **Signature details**: the hero opens with the story's first line; story titles get a marigold highlighter stroke on hover; selected text is highlighted in marigold, like a student's marker.
+- **Signature details**: the hero opens with the story's first line; story titles get a marigold highlighter stroke on hover; selected text is highlighted in marigold, like a highlighter on a draft.
 - Story HTML is sanitised on the server before it is saved.

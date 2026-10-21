@@ -37,7 +37,7 @@ export default function SettingsAdmin() {
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel title="The blog">
           <div className="space-y-4">
-            <Field label="Blog name" htmlFor="sn" hint="The first word is set bold, the rest in italic."><input id="sn" value={s.siteName} onChange={set('siteName')} className={inputCls} /></Field>
+            <Field label="Blog name" htmlFor="sn" hint="In the logo, a leading “The” is set small, the next word bold and the rest in italic."><input id="sn" value={s.siteName} onChange={set('siteName')} className={inputCls} /></Field>
             <Field label="Tagline" htmlFor="tg" hint="Used in the footer and in search results."><textarea id="tg" rows={2} value={s.tagline} onChange={set('tagline')} className={inputCls} /></Field>
           </div>
         </Panel>
@@ -61,7 +61,7 @@ export default function SettingsAdmin() {
           <div className="grid gap-6 md:grid-cols-[auto_1fr]">
             <div className="flex gap-4">
               {[0, 1].map((i) => {
-                const src = s.homePhotos?.[i] || (i === 0 ? '/writer/standing.webp' : '/writer/seated.webp');
+                const src = s.homePhotos?.[i] || (i === 0 ? '/writer/main.webp' : '/writer/seated.webp');
                 const setPhoto = (url) => { const arr = [...(s.homePhotos || ['', ''])]; while (arr.length < 2) arr.push(''); arr[i] = url; setS({ ...s, homePhotos: arr }); };
                 return (
                   <div key={i} className="w-32">

@@ -155,7 +155,7 @@ export default function PostEditor({ id }) {
                   {cats.map((c) => <option key={c._id} value={c._id}>{c.name}</option>)}
                 </select>
               </Field>
-              <Field label="Tags" htmlFor="tags" hint="Separate with commas, e.g. exams, faith, first year">
+              <Field label="Tags" htmlFor="tags" hint="Separate with commas, e.g. feedback, essays, classroom">
                 <input id="tags" value={post.tags} onChange={set('tags')} className={inputCls} />
               </Field>
               <Field label="Summary" htmlFor="excerpt" hint="Shown under the title and in link previews. Leave empty to use the opening lines.">

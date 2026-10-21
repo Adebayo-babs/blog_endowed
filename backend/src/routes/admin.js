@@ -7,14 +7,14 @@ const User = require('../models/User');
 const DailyStat = require('../models/DailyStat');
 const Settings = require('../models/Settings');
 const { requireAdmin } = require('../middleware/auth');
-const { clean, toPlainText, readingTime, makeExcerpt, slugify, lagosDay } = require('../utils/content');
+const { clean, toPlainText, readingTime, makeExcerpt, slugify, siteDay } = require('../utils/content');
 
 router.use(requireAdmin);
 
 /* ---------- Dashboard analytics ---------- */
 router.get('/stats', async (req, res) => {
   const days = Math.min(90, Math.max(7, parseInt(req.query.days) || 30));
-  const dayList = [...Array(days)].map((_, i) => lagosDay(new Date(Date.now() - (days - 1 - i) * 864e5)));
+  const dayList = [...Array(days)].map((_, i) => siteDay(new Date(Date.now() - (days - 1 - i) * 864e5)));
 
   const [totals, daily, topPosts, readers, comments, drafts, recentComments, prevPeriod] = await Promise.all([
     Post.find({ status: 'published' }).select('views likesCount').lean(),
@@ -25,7 +25,7 @@ router.get('/stats', async (req, res) => {
     Comment.countDocuments({ hidden: false }),
     Post.countDocuments({ status: 'draft' }),
     Comment.find().sort({ createdAt: -1 }).limit(5).populate('user', 'name').populate('post', 'title slug').lean(),
-    DailyStat.aggregate([{ $match: { day: { $gte: lagosDay(new Date(Date.now() - (days * 2 - 1) * 864e5)), $lt: dayList[0] } } },
+    DailyStat.aggregate([{ $match: { day: { $gte: siteDay(new Date(Date.now() - (days * 2 - 1) * 864e5)), $lt: dayList[0] } } },
       { $group: { _id: null, views: { $sum: '$views' } } }]),
   ]);
 

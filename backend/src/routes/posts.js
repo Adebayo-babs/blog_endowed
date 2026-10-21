@@ -5,7 +5,7 @@ const Category = require('../models/Category');
 const User = require('../models/User');
 const DailyStat = require('../models/DailyStat');
 const { optionalAuth, requireAuth } = require('../middleware/auth');
-const { lagosDay } = require('../utils/content');
+const { siteDay } = require('../utils/content');
 
 const LIST_FIELDS = 'title slug excerpt coverImage coverAlt category tags readingTime views likesCount commentsCount publishedAt featured';
 const published = () => ({ status: 'published', publishedAt: { $lte: new Date() } });
@@ -100,7 +100,7 @@ router.post('/:slug/view', async (req, res) => {
   if (!post) return res.status(404).json({ message: 'Not found' });
   await Post.updateOne({ _id: post._id }, { $inc: { views: 1 } });
   post.views += 1;
-  await DailyStat.updateOne({ post: post._id, day: lagosDay() }, { $inc: { views: 1 } }, { upsert: true });
+  await DailyStat.updateOne({ post: post._id, day: siteDay() }, { $inc: { views: 1 } }, { upsert: true });
   res.json({ views: post.views });
 });
 

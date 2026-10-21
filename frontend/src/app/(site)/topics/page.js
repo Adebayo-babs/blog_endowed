@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { getJSON } from '@/lib/api';
 
 export const revalidate = 300;
-export const metadata = { title: 'Topics', description: 'Faith, purpose, relationships, campus life and career. Find stories by what you’re going through.', alternates: { canonical: '/topics' } };
+export const metadata = { title: 'Topics', description: 'Teaching strategies, writing resources and reflections, grouped by topic.', alternates: { canonical: '/topics' } };
 
 export default async function TopicsPage() {
   const data = await getJSON('/categories');

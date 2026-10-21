@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // One document per post per day. Keeps the analytics chart cheap to query.
 const dailyStatSchema = new mongoose.Schema({
   post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post', required: true },
-  day: { type: String, required: true }, // YYYY-MM-DD (Africa/Lagos)
+  day: { type: String, required: true }, // YYYY-MM-DD in the writer's time zone
   views: { type: Number, default: 0 },
 });
 

@@ -9,13 +9,13 @@ import './globals.css';
 export async function generateMetadata() {
   const data = await getJSON('/settings', { revalidate: 300 });
   const s = data?.settings || {};
-  const name = s.siteName || 'Endowed Writes';
-  const description = s.tagline || 'Honest stories on faith, purpose and becoming.';
+  const name = s.siteName || 'The Endowed Academy';
+  const description = s.tagline || 'Practical ideas for thinking, writing, and teaching with intention.';
   return {
     metadataBase: new URL(SITE_URL),
-    title: { default: `${name}: stories on faith, purpose and campus life`, template: `%s | ${name}` },
+    title: { default: `${name}: teaching strategies, writing resources and reflections`, template: `%s | ${name}` },
     description,
-    openGraph: { type: 'website', siteName: name, title: name, description, url: SITE_URL, locale: 'en_NG' },
+    openGraph: { type: 'website', siteName: name, title: name, description, url: SITE_URL, locale: 'en_US' },
     twitter: { card: 'summary_large_image', title: name, description },
     alternates: { canonical: '/' },
   };

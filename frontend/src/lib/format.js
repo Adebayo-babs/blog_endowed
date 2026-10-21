@@ -1,5 +1,5 @@
 export const formatDate = (d, opts = { day: 'numeric', month: 'long', year: 'numeric' }) =>
-  d ? new Intl.DateTimeFormat('en-GB', { timeZone: 'Africa/Lagos', ...opts }).format(new Date(d)) : '';
+  d ? new Intl.DateTimeFormat('en-US', { timeZone: 'America/Chicago', ...opts }).format(new Date(d)) : '';
 
 export const shortDate = (d) => formatDate(d, { day: 'numeric', month: 'short', year: 'numeric' });
 
