@@ -91,7 +91,7 @@ export default async function StoryPage({ params }) {
 
         {post.coverImage && (
           <figure className="mx-auto mt-10 max-w-5xl px-4 sm:px-6">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.75rem] bg-indigo-soft">
+            <div className="relative aspect-[3/2] overflow-hidden rounded-[1.75rem] bg-indigo-soft">
               <Image src={post.coverImage} alt={post.coverAlt || ''} fill priority sizes="(min-width: 1024px) 1024px, 100vw" className="object-cover" />
             </div>
             {post.coverAlt && <figcaption className="mt-3 text-center text-sm text-muted">{post.coverAlt}</figcaption>}

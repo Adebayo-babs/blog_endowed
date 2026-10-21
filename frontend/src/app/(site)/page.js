@@ -44,7 +44,7 @@ export default async function Home() {
 
       {/* Featured story: its own opening line does the talking */}
       <section aria-label="Featured story" className="mx-auto max-w-6xl px-4 pb-16 pt-16 sm:px-6 md:pt-20">
-        <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_1fr] lg:gap-14">
+        <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-14">
           <div>
             <TopicLabel category={hero.category} />
             <Link href={`/blog/${hero.slug}`} className="group mt-5 block">
@@ -68,9 +68,9 @@ export default async function Home() {
           </div>
 
           <Link href={`/blog/${hero.slug}`} tabIndex={-1} aria-hidden
-            className="relative block aspect-[4/3] max-h-[560px] sm:aspect-[4/5] overflow-hidden rounded-[2rem] bg-indigo-soft">
+            className="relative block aspect-[3/2] overflow-hidden rounded-[2rem] bg-indigo-soft">
             {hero.coverImage && (
-              <Image src={hero.coverImage} alt="" fill priority sizes="(min-width: 1024px) 460px, 100vw" className="object-cover" />
+              <Image src={hero.coverImage} alt="" fill priority sizes="(min-width: 1024px) 600px, 100vw" className="object-cover" />
             )}
           </Link>
         </div>
